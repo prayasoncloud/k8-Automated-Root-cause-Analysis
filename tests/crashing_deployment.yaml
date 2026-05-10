@@ -1,0 +1,21 @@
+apiVersion: apps/v1  
+
+kind: Deployment
+
+metadata:
+  name: my-deployment 
+  
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:    
+      - name: crashing-container
+        image: busybox
+        command: ["/bin/sh", "-c", "echo crashing pod && exit 1"]
